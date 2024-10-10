@@ -6,7 +6,7 @@ export default function App() {
   
 
   return (
-    <View>
+    <View style={{flex:1}}>
         <Login/>
     </View>
   );
