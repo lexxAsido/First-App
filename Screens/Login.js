@@ -79,7 +79,7 @@ export default function Login() {
                     </View>
                 </View>
 
-                <Text style={{color:"#09bcf3", fontWeight:900, textAlign:"center", fontSize:15, backgroundColor:"#0a0a01", padding:10}}>Follow us on Socials</Text>
+                <Text style={{color:"#09bcf3", fontWeight:900, textAlign:"center", fontSize:15, backgroundColor:"#0a0a01", padding:10, marginVertical:22}}>Follow us on Socials</Text>
                 <View style={styles.socialContainer}>
                 <Text style={styles.socialText}>Youtube Logo</Text>
                 <Text style={styles.socialText}>Facebook Logo</Text>
@@ -126,14 +126,15 @@ const styles = StyleSheet.create({
     },
 
     signin: {
-        backgroundColor: "#0e0d01", 
-        color:"#ebdc17",
-         
+        backgroundColor: "#f0dd0f", 
+        color:"#0c0c0c",
+        fontSize:15,
         padding: 10, 
         textAlign: "center", 
         fontWeight: "800", 
         borderRadius: 50,
         marginVertical:12,
+        marginHorizontal:20,
         
     },
         socialContainer: {

@@ -12,7 +12,7 @@ export  function News() {
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
       <ImageBackground source={require("./assets/lexmedia.png")} style={{ width: "100%", flex: 1 }}>
-        <View style={{ padding: 40, paddingHorizontal: 5, backgroundColor: "#0a020ade" }}>
+        <View style={{ padding: 40, paddingHorizontal: 5, backgroundColor: "#1816045d" }}>
           <View style={{ backgroundColor: "#0e0f0e", shadowColor: "#a8bd33ff", shadowRadius: 9, shadowOpacity: 0.25, borderRadius: 20, marginVertical: 10 }}>
             <Text style={{ color: "cyan", fontSize: 35, textAlign: "center", fontWeight: "800"}}>LEXX MEDIA</Text>
           </View>
