@@ -5,13 +5,15 @@ import * as Font from 'expo-font';
 import {Pacifico_400Regular} from '@expo-google-fonts/pacifico';
 import { useCallback, useEffect, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faUserPen } from '@fortawesome/free-solid-svg-icons';
 
 
 SplashScreen.preventAutoHideAsync();
 
 const LeftContent = props => <Avatar.Image {...props} source={require("../../assets/lexmedia.png")} style={{ backgroundColor: "black" }} />
 
-export function News() {
+export function News({navigation}) {
 
   const [appIsReady, setAppIsReady] = useState(false);
 
@@ -58,13 +60,26 @@ export function News() {
 
           <View style={{ margin: 10 }}>
 
+            <TouchableOpacity 
+            onPress={()=>{navigation.navigate("Profile")}}
+            style={{alignSelf:"flex-end", marginVertical:5}}>
+              <Button textColor='cyan'  buttonColor='black' > Welcome!
+              <FontAwesomeIcon icon={faUserPen} color='white'/>
+                  </Button>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={()=>{navigation.navigate("Login")}}>
+            <Text style={{alignSelf:"flex-end", fontWeight:800, fontFamily:"Pacifico_400Regular",fontSize:15}}>LogOut</Text>
+            </TouchableOpacity>
+
+            {/* <Button textColor='yellow' style={{alignSelf:"flex-end", fontWeight:"bold"}} onPress={()=>{navigation.navigate("Login")}}>LogOut</Button> */}
 
             <Card>
               <Card.Title  title="Politics Today" left={LeftContent} />
               <Card.Content>
                 <Text variant="titleLarge" style={{ fontSize: 20, fontWeight: 800, marginBottom: 20, fontFamily:"Pacifico_400Regular" }}>Gov Fubara stops police attempt to takeover RSIEC Office in PortHarcourt</Text>
                 <Card.Cover source={require("../../assets/fubara.jpg")} />
-                <Text variant="bodyMedium" style={{ marginTop: 15, fontFamily:"Pacifico_400Regular", fontSize:15 }}> The incident led to a faceoff between the Governor, his supporters and suspected police officers in the early hours of the morning.
+                <Text variant="bodyMedium" style={{ marginTop: 15,  fontSize:15 }}> The incident led to a faceoff between the Governor, his supporters and suspected police officers in the early hours of the morning.
 
                   The Governor said he stormed the RSIEC office after getting reports that a new team of police officers had arrived to take over the complex on Aba Road in Port Harcourt.
 
@@ -88,7 +103,7 @@ export function News() {
                 <Text variant="titleLarge" style={{ fontSize: 20, fontWeight: 800, marginBottom: 20, fontFamily:"Pacifico_400Regular"}}>VeryDarkBlackMan releases another voice recording of Bobrisky</Text>
                 <Card.Cover source={require("../../assets/bob.jpg")} />
 
-                <Text variant="bodyMedium" style={{ marginTop: 15, fontFamily:"Pacifico_400Regular" }}>Nigerians have taken to social media to express their thoughts on the latest leaked call recording
+                <Text variant="bodyMedium" style={{ marginTop: 15, }}>Nigerians have taken to social media to express their thoughts on the latest leaked call recording
                   allegedly featuring controversial crossdresser,
                   Idris Okuneye, popularly known as Bobrisky.
                   Bobrisky, on Monday, found himself at the centre of another controversy following the release of an alleged call recording by social media influencer, Martins Otse, aka VeryDarkMan.
@@ -113,7 +128,7 @@ export function News() {
               <Card.Content>
                 <Text variant="titleLarge" style={{ fontSize: 20, fontWeight: 800, marginBottom: 20, fontFamily:"Pacifico_400Regular" }}>Stones heads last-gasp winner as Man City come back to beat Wolves</Text>
                 <Card.Cover source={require("../../assets/wolman.jpg")} />
-                <Text variant="bodyMedium" style={{ marginTop: 15, fontFamily:"Pacifico_400Regular" }}>John Stones' dramatic stoppage-time winner kept Manchester City in touch with Premier League leaders
+                <Text variant="bodyMedium" style={{ marginTop: 15, }}>John Stones' dramatic stoppage-time winner kept Manchester City in touch with Premier League leaders
                   Liverpool as the champions beat battling Wolves.
 
                   The defender's header - in the fifth minute of injury time - was given

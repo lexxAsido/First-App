@@ -8,7 +8,7 @@ import { faAddressCard, faCommentDots } from "@fortawesome/free-regular-svg-icon
 
 
 
-export default function Profile() {
+export default function Profile({navigation}) {
     return (
         <View style={{ flex: 1, backgroundColor: "#15eeee" }}>
             <ScrollView>
@@ -99,7 +99,10 @@ export default function Profile() {
                         <FontAwesomeIcon icon={faAddressCard}/>
                     </View>
                 </View>
-
+                    
+                    <TouchableOpacity onPress={()=>{navigation.navigate("Intro")}}>
+                    <Text style={{fontSize:30, fontFamily:"Pacifico_400Regular", alignSelf:"center", marginVertical:24}}>SignOut</Text>
+                    </TouchableOpacity>
             </ScrollView>
         </View>
     )
