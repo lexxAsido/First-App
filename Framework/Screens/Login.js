@@ -7,6 +7,8 @@ import {Button as Btn} from "react-native-paper"
 import * as SplashScreen from 'expo-splash-screen';
 import * as Font from 'expo-font';
 import {Pacifico_400Regular} from '@expo-google-fonts/pacifico';
+import { Theme } from "../Component/Theme";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 
 SplashScreen.preventAutoHideAsync();
@@ -17,36 +19,6 @@ export default function Login({navigation}) {
     
     const [password, setPassword] = useState("");
 
-
-    const [appIsReady, setAppIsReady] = useState(false);
-
-  useEffect(() => {
-    async function prepare() {
-      try {
-        
-        await Font.loadAsync({Pacifico_400Regular});
-        await new Promise(resolve => setTimeout(resolve, 2000));
-      } catch (e) {
-        console.warn(e);
-      } finally {
-      
-        setAppIsReady(true);
-      }
-    }
-
-    prepare();
-  }, []);
-
-  const onLayoutRootView = useCallback(async () => {
-    if (appIsReady) {
-      
-      await SplashScreen.hideAsync();
-    }
-  }, [appIsReady]);
-
-  if (!appIsReady) {
-    return null;
-  }
 
     return (
         <View style={{flex:1}}>
@@ -61,7 +33,7 @@ export default function Login({navigation}) {
                 <View style={styles.container}>
                     <View style={{flexDirection:"row", gap:8, justifyContent:"center", alignItems:"center"}}>
                         <FontAwesomeIcon icon={faArrowRightToBracket} size={30} />
-                        <Text style={{ fontSize:30, fontFamily:"Pacifico_400Regular" }}>Lexx Media</Text>
+                        <Text style={{ fontSize:30, fontFamily:Theme.fonts.text800 }}>Lexx Media</Text>
                     </View>
                     <View>
                        
@@ -79,7 +51,7 @@ export default function Login({navigation}) {
                         <TextInput
                             style={styles.input}
                             placeholder="Enter Password"
-                            placeholderTextColor={"#15eeee8a"}
+                            placeholderTextColor={"#15eeee85"}
                             secureTextEntry={true}
                             onChangeText={(input) => setPassword(input)}
                             // value={password}
@@ -87,6 +59,7 @@ export default function Login({navigation}) {
                     </View>
 
                     <TouchableOpacity
+                    
                     onPress={()=>{
                         
                         if (!users.includes(email)) {
@@ -107,17 +80,21 @@ export default function Login({navigation}) {
                         navigation.navigate("News")
                         }}>
                         
-                        <Btn mode='elevated' textColor='black' buttonColor='#f3ef15'  style={{elevation:20, marginTop:10, marginHorizontal:20,}} >SignIn</Btn>
+                        {/* <Btn mode='elevated' textColor='black' buttonColor='#f3ef15'  style={{elevation:20, marginTop:10, marginHorizontal:20,}} >SignIn</Btn> */}
+                        <View style={{flexDirection:"row", backgroundColor:Theme.colors.primary, padding:10, borderRadius:20,  justifyContent:"center", alignItems:"center"}}>
+                        <Text style={{fontFamily:Theme.fonts.text900, fontSize:18}}>Login </Text>
+                        <FontAwesomeIcon icon={faArrowRight} />
+                        </View>
                     </TouchableOpacity>
 
                     
                     <View style={{flexDirection:"row", justifyContent: "space-between"}}>
                     <TouchableOpacity>
-                    <Text style={{color:"#df0b0b", fontWeight:800, padding:5}}>Forgot Password</Text>
+                    <Text style={{color:"#df0b0b", fontFamily:Theme.fonts.text600, padding:5}}>Forgot Password</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={()=>{navigation.navigate("SignUp")}}>
-                    <Text style={{ fontWeight:900, padding:5}}>Create Account</Text>
+                    <Text style={{ fontFamily:Theme.fonts.text600, padding:5}}>Create Account</Text>
                     </TouchableOpacity>
                     </View>
                 </View>

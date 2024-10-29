@@ -8,39 +8,12 @@ import { Button } from 'react-native-paper';
 import { TouchableOpacity } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { Theme } from '../Component/Theme';
 
 SplashScreen.preventAutoHideAsync();
 
 export default function Intro({navigation}) {
-    const [appIsReady, setAppIsReady] = useState(false);
-
-    useEffect(() => {
-        async function prepare() {
-            try {
-
-                await Font.loadAsync({ Pacifico_400Regular });
-                await new Promise(resolve => setTimeout(resolve, 2000));
-            } catch (e) {
-                console.warn(e);
-            } finally {
-
-                setAppIsReady(true);
-            }
-        }
-
-        prepare();
-    }, []);
-
-    const onLayoutRootView = useCallback(async () => {
-        if (appIsReady) {
-
-            await SplashScreen.hideAsync();
-        }
-    }, [appIsReady]);
-
-    if (!appIsReady) {
-        return null;
-    }
+    
 
     return (
         <View style={{ flex: 1, alignContent:"center" }}>
@@ -49,7 +22,7 @@ export default function Intro({navigation}) {
                 <View>
                     <Image source={require("../../assets/lexmedia.png")} style={styles.logo} />
                     <Text style={styles.description}>
-                        <Text style={{ fontFamily: "Pacifico_400Regular", fontSize: 35, color: "#f3ef15" }}>LexxMedia</Text> is a dynamic platform delivering the latest in entertainment, news, and pop culture.
+                        <Text style={{ fontFamily: Theme.fonts.brand, fontSize: 35, color: Theme.colors.primary }}>LexxMedia</Text> is a dynamic platform delivering the latest in entertainment, news, and pop culture.
                         Stay informed with trending stories, exclusive updates, and engaging content from around the world.
                     </Text>
                 </View>
@@ -58,7 +31,7 @@ export default function Intro({navigation}) {
                     <Button mode='elevated' textColor='black' buttonColor='cyan' icon="login"  style={{elevation:20, marginTop:90, marginHorizontal:20}}>Login</Button>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={{alignContent:"center",}} onPress={()=>{navigation.navigate("SignUp")}}>
+                <TouchableOpacity style={{alignContent:"center"}} onPress={()=>{navigation.navigate("SignUp")}}>
                     
                     <Button mode='elevated' textColor='black' buttonColor='#f3ef15'  style={{elevation:20, marginTop:10, marginHorizontal:20,}}>
                     <FontAwesomeIcon icon={faUser}/>
@@ -81,7 +54,7 @@ const styles = StyleSheet.create({
     },
     description: {
         color: "#d8e0e6",
-        fontWeight: "500",
+        fontFamily:Theme.fonts.text500,
         paddingHorizontal: 10,
         textAlign: "center",
         fontSize: 20,
