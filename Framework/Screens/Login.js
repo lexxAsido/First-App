@@ -28,9 +28,9 @@ export default function Login({ navigation }) {
     const { setUserUID, setPreloader } = useContext(AppContext);
 
     return (
-        <SafeAreaView style={{ flex: 1 }}>
 
-            <ImageBackground source={require("../../assets/news.jpg")} style={{ width: "100%", flex: 1 }}>
+        <ImageBackground source={require("../../assets/news.jpg")} style={{ width: "100%", flex: 1 }}>
+            <SafeAreaView style={{ flex: 1,}}>
 
                 <Formik
                     initialValues={{ email: "", password: "" }}
@@ -57,8 +57,8 @@ export default function Login({ navigation }) {
                             <View style={styles.shadow}>
 
                                 <View style={styles.container}>
-                                    <View style={{ flexDirection: "row", gap: 8, justifyContent: "center", alignItems: "center" }}>
-                                        <Text style={{ fontSize: 30, fontFamily: Theme.fonts.brand }}>Lexx Media</Text>
+                                    <View style={{ flexDirection: "row", gap: 4, justifyContent: "center", alignItems: "center", marginBottom:15 }}>
+                                        <Text style={{ fontSize: 30, fontFamily: Theme.fonts.text700 }}>Lexx Media</Text>
                                         <FontAwesomeIcon icon={faArrowRightToBracket} size={30} />
                                     </View>
 
@@ -96,26 +96,26 @@ export default function Login({ navigation }) {
 
                                     <TouchableOpacity onPress={prop.handleSubmit}
 
-                                        // onPress={() => {
+                                    // onPress={() => {
 
-                                        //     if (!users.includes(email)) {
-                                        //         setUsers([...users, email]);
-                                        //         setEmail("");
+                                    //     if (!users.includes(email)) {
+                                    //         setUsers([...users, email]);
+                                    //         setEmail("");
 
-                                        //         Alert.alert(
-                                        //             "Login Status", "Login Successful, Welcome Onboard",
-                                        //             [
-                                        //                 { text: "activated", onPress: () => alert("Your Account has been Activated") },
-                                        //                 // { text: "Delete", style: 'destructive', onPress: () => console.log("Account deleted") }
-                                        //             ]
-                                        //         )
-                                        //     }
-                                           
-                                        //     navigation.navigate("News")
-                                        // }}
-                                        >
+                                    //         Alert.alert(
+                                    //             "Login Status", "Login Successful, Welcome Onboard",
+                                    //             [
+                                    //                 { text: "activated", onPress: () => alert("Your Account has been Activated") },
+                                    //                 // { text: "Delete", style: 'destructive', onPress: () => console.log("Account deleted") }
+                                    //             ]
+                                    //         )
+                                    //     }
 
-                                        
+                                    //     navigation.navigate("News")
+                                    // }}
+                                    >
+
+
                                         <View style={{ flexDirection: "row", backgroundColor: Theme.colors.primary, padding: 10, borderRadius: 20, justifyContent: "center", alignItems: "center" }}>
                                             <Text style={{ fontFamily: Theme.fonts.text900, fontSize: 18 }}>Login </Text>
                                             <FontAwesomeIcon icon={faArrowRight} />
@@ -123,8 +123,8 @@ export default function Login({ navigation }) {
                                     </TouchableOpacity>
 
 
-                                    <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop:5}}>
-                                        <TouchableOpacity>
+                                    <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 5 }}>
+                                        <TouchableOpacity onPress={() => { navigation.navigate("ForgotPassword") }}>
                                             <Text style={{ color: "#df0b0b", fontFamily: Theme.fonts.text600, padding: 5 }}>Forgot Password</Text>
                                         </TouchableOpacity>
 
@@ -142,8 +142,8 @@ export default function Login({ navigation }) {
                     }}
 
                 </Formik>
-            </ImageBackground>
-        </SafeAreaView>
+            </SafeAreaView>
+        </ImageBackground>
     );
 }
 
@@ -177,12 +177,11 @@ const styles = StyleSheet.create({
         backgroundColor: "#0d0e0e",
         padding: 15,
         borderRadius: 50,
-        marginVertical: 10,
         fontSize: 20,
         textAlign: "center",
         color: "#ffffff",
         fontWeight: "800",
-        fontFamily: "Pacifico_400Regular",
+        fontFamily: Theme.fonts.text800,
     },
 
     signin: {
@@ -223,9 +222,9 @@ const styles = StyleSheet.create({
     shadow: {
         backgroundColor: "#ffffffb7",
         width: 350,
-        height: 400,
+        height: 350,
         borderRadius: 20,
-        marginTop: "70%",
+        marginTop: "40%",
         elevation: 10,
         shadowColor: "#15eeee",
         shadowOpacity: 1,

@@ -1,60 +1,81 @@
-import { Image, ImageBackground, ScrollView, Text, View, StyleSheet, Linking } from 'react-native';
+import { Image, ImageBackground, ScrollView, Text, View, StyleSheet, Linking, Dimensions } from 'react-native';
 import { Avatar, Button, Card, } from 'react-native-paper';
 import * as SplashScreen from 'expo-splash-screen';
 import * as Font from 'expo-font';
-import {Pacifico_400Regular} from '@expo-google-fonts/pacifico';
-import { useCallback, useEffect, useState } from 'react';
+import { Pacifico_400Regular } from '@expo-google-fonts/pacifico';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faUserPen } from '@fortawesome/free-solid-svg-icons';
 import { Theme } from '../Component/Theme';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Profile from './Profile';
+import { Ionicons } from "@expo/vector-icons";
+import Carousel from 'react-native-reanimated-carousel';
+import { Profile } from './Profile';
+import { AppContext } from '../Component/globalVariables';
+import { doc, onSnapshot } from 'firebase/firestore';
+import { db } from '../Firebase/Settings';
+import { PostNews } from './PostNews';
+import { Politics } from './Politics';
+import { Sport } from './Sport';
+import { Entertainment } from './Entertainment';
+
+
 
 
 
 
 const LeftContent = props => <Avatar.Image {...props} source={require("../../assets/lexmedia.png")} style={{ backgroundColor: "black" }} />
+const { width, height } = Dimensions.get("screen")
+function Home({ navigation }) {
+  const { userUID, userInfo, setDoc, setPreloader, setUserInfo } = useContext(AppContext)
 
-function Home({navigation}) {
+  const carouselLinks = [
+    // "https://media.istockphoto.com/id/140054736/photo/media-technologies-concept.jpg?s=612x612&w=0&k=20&c=PZrkQkRwVmD3RysYIfHROQFQEidr7k9G2M9rtQGays0=",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRO821Chq6MWkkjlx6mu_iWW4VGSO8w9VZWsg&s",
+    "https://img.freepik.com/premium-vector/sports-news-with-abstract-background-sports-elements_1419-1926.jpg?w=360",
+    "https://c8.alamy.com/comp/GXG2Y4/news-concept-political-news-on-digital-background-GXG2Y4.jpg",
+  ];
 
- 
-
-  const handleReadMore = () => {
-    Linking.openURL('https://punchng.com/nigerians-react-as-verydarkman-shares-another-alleged-call-recording-of-bobrisky/#:~:text=Bobrisky,%20on%20Monday,%20found%20himself%20at%20the%20centre%20of%20another');
-  };
-  const handleReadMore2 = () => {
-    Linking.openURL('https://www.tvcnews.tv/2024/10/breaking-fubara-allegedly-voids-police-attempt-to-seal-off-rsiec-headquarters/#:~:text=Rivers%20State%20governor,%20Siminalayi%20Fubara%20said%20he%20foiled%20an');
-  };
+  function getUserInfo() {
+    setPreloader(true);
+    onSnapshot(doc(db, "users", userUID), (snapShot) => {
+        setPreloader(false);
+        snapShot.exists() ? setUserInfo(snapShot.data()) : null;
+    });
+} 
+useEffect(() => {
+  getUserInfo();
+  
+}, []);
 
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
       <ImageBackground source={require("../../assets/lexmedia.png")} style={{ width: "100%" }}>
         <View style={{ padding: 40, paddingHorizontal: 5, backgroundColor: "#0e131346" }}>
-          <Button mode='elevated' textColor='black' buttonColor='#eed80f' uppercase style={{ marginHorizontal: 10, }} labelStyle={{ fontSize: 20, fontFamily:Theme.fonts.text800}}>Lexx Media</Button>
+         
+          <View style={{ marginVertical: 10, marginHorizontal:10 }}>
+            <Carousel
+              loop
+              width={width - 30}
+              height={250}
+              autoPlay={true}
+              data={carouselLinks}
+              style={{ borderRadius: 10 }}
+              scrollAnimationDuration={9000}
+              renderItem={({ index }) => (
+                <Image style={{ width: '100%', height: 250, borderRadius: 10, }} source={{ uri: carouselLinks[index] }} />
+              )}
+            />
+          </View>
 
           <View style={{ margin: 10 }}>
-
-            <TouchableOpacity 
-            onPress={()=>{navigation.navigate("Profile")}}
-            style={{alignSelf:"flex-end", marginVertical:5}}>
-              <Button textColor='cyan'  buttonColor='black' > Welcome!
-              <FontAwesomeIcon icon={faUserPen} color='white'/>
-                  </Button>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={()=>{navigation.navigate("Login")}}>
-            <Text style={{alignSelf:"flex-end", fontWeight:800, fontFamily:"Pacifico_400Regular",fontSize:15}}>LogOut</Text>
-            </TouchableOpacity>
-
-            {/* <Button textColor='yellow' style={{alignSelf:"flex-end", fontWeight:"bold"}} onPress={()=>{navigation.navigate("Login")}}>LogOut</Button> */}
-
             <Card>
-              <Card.Title  title="Politics Today" left={LeftContent} />
+              <Card.Title title="Politics Today" left={LeftContent} />
               <Card.Content>
-                <Text variant="titleLarge" style={{ fontSize: 20, marginBottom: 20, fontFamily:Theme.fonts.text700 }}>Gov Fubara stops police attempt to takeover RSIEC Office in PortHarcourt</Text>
+                <Text variant="titleLarge" style={{ fontSize: 20, marginBottom: 20, fontFamily: Theme.fonts.text700 }}>Gov Fubara stops police attempt to takeover RSIEC Office in PortHarcourt</Text>
                 <Card.Cover source={require("../../assets/fubara.jpg")} />
-                <Text variant="bodyMedium" style={{ marginTop: 15,  fontSize:15, fontFamily:Theme.fonts.text500 }}> The incident led to a faceoff between the Governor, his supporters and suspected police officers in the early hours of the morning.
+                <Text variant="bodyMedium" style={{ marginTop: 15, fontSize: 15, fontFamily: Theme.fonts.text500 }}> The incident led to a faceoff between the Governor, his supporters and suspected police officers in the early hours of the morning.
 
                   The Governor said he stormed the RSIEC office after getting reports that a new team of police officers had arrived to take over the complex on Aba Road in Port Harcourt.
 
@@ -62,11 +83,11 @@ function Home({navigation}) {
               </Card.Content>
               <Card.Actions>
                 <TouchableOpacity>
-                <Button mode="elevated" textColor='cyan' buttonColor="black">ReadMore</Button>
+                  <Button mode="elevated" textColor='cyan' buttonColor="black">ReadMore</Button>
                 </TouchableOpacity>
 
                 <TouchableOpacity>
-                <Button buttonColor='#eed80f' textColor='black'>share</Button>
+                  <Button buttonColor='#eed80f' textColor='black'>share</Button>
                 </TouchableOpacity>
               </Card.Actions>
             </Card>
@@ -75,10 +96,10 @@ function Home({navigation}) {
             <Card style={{ marginTop: 30 }}>
               <Card.Title title="Entertainment" left={LeftContent} />
               <Card.Content>
-                <Text variant="titleLarge" style={{ fontSize: 20, marginBottom: 20, fontFamily: Theme.fonts.text700}}>VeryDarkBlackMan releases another voice recording of Bobrisky</Text>
+                <Text variant="titleLarge" style={{ fontSize: 20, marginBottom: 20, fontFamily: Theme.fonts.text700 }}>VeryDarkBlackMan releases another voice recording of Bobrisky</Text>
                 <Card.Cover source={require("../../assets/bob.jpg")} />
 
-                <Text variant="bodyMedium" style={{ marginTop: 15, fontFamily:Theme.fonts.text500}}>Nigerians have taken to social media to express their thoughts on the latest leaked call recording
+                <Text variant="bodyMedium" style={{ marginTop: 15, fontFamily: Theme.fonts.text500 }}>Nigerians have taken to social media to express their thoughts on the latest leaked call recording
                   allegedly featuring controversial crossdresser,
                   Idris Okuneye, popularly known as Bobrisky.
                   Bobrisky, on Monday, found himself at the centre of another controversy following the release of an alleged call recording by social media influencer, Martins Otse, aka VeryDarkMan.
@@ -88,11 +109,11 @@ function Home({navigation}) {
               </Card.Content>
               <Card.Actions>
                 <TouchableOpacity>
-                <Button mode="elevated" textColor='cyan' buttonColor="black">ReadMore</Button>
+                  <Button mode="elevated" textColor='cyan' buttonColor="black">ReadMore</Button>
                 </TouchableOpacity>
 
                 <TouchableOpacity>
-                <Button buttonColor='#eed80f' textColor='black'>share</Button>
+                  <Button buttonColor='#eed80f' textColor='black'>share</Button>
                 </TouchableOpacity>
               </Card.Actions>
             </Card>
@@ -101,9 +122,9 @@ function Home({navigation}) {
             <Card style={{ marginTop: 30 }}>
               <Card.Title title="Sports" left={LeftContent} />
               <Card.Content>
-                <Text variant="titleLarge" style={{ fontSize: 20, marginBottom: 20, fontFamily:Theme.fonts.text700 }}>Stones heads last-gasp winner as Man City come back to beat Wolves</Text>
+                <Text variant="titleLarge" style={{ fontSize: 20, marginBottom: 20, fontFamily: Theme.fonts.text700 }}>Stones heads last-gasp winner as Man City come back to beat Wolves</Text>
                 <Card.Cover source={require("../../assets/wolman.jpg")} />
-                <Text variant="bodyMedium" style={{ marginTop: 15, fontFamily:Theme.fonts.text500}}>John Stones' dramatic stoppage-time winner kept Manchester City in touch with Premier League leaders
+                <Text variant="bodyMedium" style={{ marginTop: 15, fontFamily: Theme.fonts.text500 }}>John Stones' dramatic stoppage-time winner kept Manchester City in touch with Premier League leaders
                   Liverpool as the champions beat battling Wolves.
 
                   The defender's header - in the fifth minute of injury time - was given
@@ -120,11 +141,11 @@ function Home({navigation}) {
               </Card.Content>
               <Card.Actions>
                 <TouchableOpacity>
-                <Button mode="elevated" textColor='cyan' buttonColor="black">ReadMore</Button>
+                  <Button mode="elevated" textColor='cyan' buttonColor="black">ReadMore</Button>
                 </TouchableOpacity>
 
                 <TouchableOpacity>
-                <Button buttonColor='#eed80f' textColor='black'>share</Button>
+                  <Button buttonColor='#eed80f' textColor='black'>share</Button>
                 </TouchableOpacity>
               </Card.Actions>
             </Card>
@@ -140,11 +161,54 @@ const Tab = createBottomTabNavigator();
 
 export function News() {
   return (
-    <Tab.Navigator screenOptions={{headerShown: false}}>
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color }) => {
+          let iconName;
+          let size;
+          if (route.name === 'Home') {
+            size = focused ? 35 : 23
+            iconName = focused ? 'home' : 'home-outline';
+          }
+          if (route.name === 'Entertainment') {
+              size = focused ? 35 : 23
+              iconName = focused ? 'videocam' : 'videocam-outline';
+          }
+          if (route.name === 'Sport') {
+              size = focused ? 35 : 23
+              iconName = focused ? 'football' : 'football-sharp';
+          }
+          if (route.name === 'Politics') {
+              size = focused ? 35 : 23
+              iconName = focused ? 'newspaper' : 'newspaper';
+          }
+          if (route.name === 'PostNews') {
+              size = focused ? 35 : 23
+              iconName = focused ? 'add-circle' : 'add-circle';
+          }
+
+
+          else if (route.name === 'Profile') {
+            size = focused ? 35 : 23
+            iconName = focused ? 'person' : 'person-outline';
+          }
+
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+        tabBarActiveTintColor: Theme.colors.blueDark,
+        tabBarInactiveTintColor: Theme.colors.black,
+        // tabBarInactiveBackgroundColor: "black",
+        // tabBarActiveBackgroundColor: "black",
+        headerShown: false,
+      })}
+    >
       <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Entertainment" component={Entertainment} />
+      <Tab.Screen name="Sport" component={Sport} />
+      <Tab.Screen name="Politics" component={Politics} />
+      <Tab.Screen name="PostNews" component={PostNews} />
       <Tab.Screen name="Profile" component={Profile} />
-      {/* <Tab.Screen name="Cart" component={Cart} /> */}
-      {/* <Tab.Screen name="Profile" component={Profile} /> */}
+
     </Tab.Navigator>
   );
 }

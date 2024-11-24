@@ -1,25 +1,24 @@
-import { Image, ImageBackground, ScrollView, Text, View, StyleSheet, Linking, LogBox} from 'react-native';
-import { News } from './Framework/Screens/News';
-import Profile from './Framework/Screens/Profile';
-import Login from './Framework/Screens/Login';
-import Intro from './Framework/Screens/Intro';
+import { useEffect, useState } from "react";
+import * as SplashScreen from "expo-splash-screen";
+import * as Font from "expo-font";
 import { StackNavigator } from './Framework/Navigation/Stack';
-import { useEffect, useState, useCallback } from "react";
+import { AppProvider } from './Framework/Component/globalVariables';
 
+// Fonts
 import { Pacifico_400Regular } from "@expo-google-fonts/pacifico";
 import {
   Montserrat_100Thin, Montserrat_200ExtraLight, Montserrat_300Light, Montserrat_400Regular,
   Montserrat_500Medium, Montserrat_600SemiBold, Montserrat_700Bold, Montserrat_800ExtraBold, Montserrat_900Black
-} from "@expo-google-fonts/montserrat"
-import * as SplashScreen from "expo-splash-screen";
-import * as Font from "expo-font";
-import SignUp from './Framework/Screens/SignUp';
-import { AppProvider } from './Framework/Component/globalVariables';
+} from "@expo-google-fonts/montserrat";
+import { Profile } from "./Framework/Screens/Profile";
+import { EditProfile } from "./Framework/Screens/EditProfile";
+import { Preloader } from "./Framework/Component/preloader";
+import { News } from "./Framework/Screens/News";
+import { PostNews } from "./Framework/Screens/PostNews";
 
 
-LogBox.ignoreLogs(["ViewPropTypes will be removed from React Native, along with all other PropTypes. We recommend that you migrate away from PropTypes and switch to a type system like TypeScript. If you need to continue using ViewPropTypes, migrate to the 'deprecated-react-native-prop-types' package."])
-
-
+// Prevent splash screen from hiding automatically
+SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -27,17 +26,22 @@ export default function App() {
   useEffect(() => {
     async function prepare() {
       try {
-        await Font.loadAsync({ Pacifico_400Regular });
-        await Font.loadAsync({ Montserrat_100Thin });
-        await Font.loadAsync({ Montserrat_200ExtraLight });
-        await Font.loadAsync({ Montserrat_300Light });
-        await Font.loadAsync({ Montserrat_400Regular });
-        await Font.loadAsync({ Montserrat_500Medium });
-        await Font.loadAsync({ Montserrat_600SemiBold });
-        await Font.loadAsync({ Montserrat_700Bold });
-        await Font.loadAsync({ Montserrat_800ExtraBold });
-        await Font.loadAsync({ Montserrat_900Black });
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        // Load fonts
+        await Font.loadAsync({
+          Pacifico_400Regular,
+          Montserrat_100Thin,
+          Montserrat_200ExtraLight,
+          Montserrat_300Light,
+          Montserrat_400Regular,
+          Montserrat_500Medium,
+          Montserrat_600SemiBold,
+          Montserrat_700Bold,
+          Montserrat_800ExtraBold,
+          Montserrat_900Black,
+        });
+
+        // Simulate a delay for any other preloading
+        await new Promise((resolve) => setTimeout(resolve, 2000));
       } catch (e) {
         console.warn(e);
       } finally {
@@ -48,23 +52,22 @@ export default function App() {
     prepare();
   }, []);
 
-  useCallback(async () => {
+  useEffect(() => {
     if (appIsReady) {
-      await SplashScreen.hideAsync();
+      SplashScreen.hideAsync();
     }
   }, [appIsReady]);
 
   if (!appIsReady) {
-    return null;
+    return null; // While loading, keep the splash screen
   }
-  
+
   return (
     <AppProvider>
-        <StackNavigator/>
-        {/* <Profile/> */}
-        {/* <SignUp/> */}
-        {/* <Login/> */}
-        
+      <StackNavigator />
+      <Preloader/>
+      
+      
     </AppProvider>
   );
 }

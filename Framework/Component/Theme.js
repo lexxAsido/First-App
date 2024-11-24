@@ -9,7 +9,7 @@ export const Theme = {
         greenDark: "#0E4D2B",
         greenMedium: "#50C878",
         greenLight: "#B7E4C7",
-        yellow: "#ffb702",
+        yellow: "#eed80f",
         mediumGreen: "#88FCB4",
         lightGreen: "#E9F9EF",
         red: "#EF4444",
