@@ -24,7 +24,7 @@ export function StackNavigator() {
                 <Stack.Screen name="SignUp" component={SignUp}  options={{headerShown:false}}/>
                 <Stack.Screen name="News" component={News} options={{headerShown:false}}/>
                 <Stack.Screen name="ForgotPassword" component={ForgotPassword} options={{headerShown:false}}/>
-                <Stack.Screen name="Profile" component={Profile} />
+                <Stack.Screen name="Profile" component={Profile} options={{title: "profile"}} />
                 <Stack.Screen name="EditProfile" component={EditProfile} />
                 <Stack.Screen name="Entertainment" component={Entertainment} />
                 <Stack.Screen name="Sport" component={Sport} />

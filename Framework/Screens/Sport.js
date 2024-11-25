@@ -54,7 +54,7 @@ export function Sport() {
                         </Card.Content>
                         <Card.Actions>
 
-                            <Text>Posted: {formatDate(item.createdAt)}</Text>
+                            <Text style={{color: "#ffffff"}}>Posted: {formatDate(item.createdAt)}</Text>
                             <Button textColor="black" buttonColor="#eed80f">
                                 Share
                             </Button>
@@ -84,16 +84,20 @@ const styles = StyleSheet.create({
     },
     card: {
         marginBottom: 20,
-        marginHorizontal: 8
+        marginHorizontal: 8,
+        backgroundColor: "#0c0c0cfb"
     },
     title: {
         fontSize: 18,
         fontWeight: 'bold',
         marginVertical: 10,
+        color: "#ffffff"
     },
     description: {
         fontSize: 14,
-        fontFamily: Theme.fonts.text500
+        fontFamily: Theme.fonts.text500,
+        color: "#ffffff",
+        marginTop:10
     },
 });
 
