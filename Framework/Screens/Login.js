@@ -52,7 +52,7 @@ export default function Login({ navigation }) {
                                 {/* Email Input */}
                                 <View>
                                     <Text style={styles.label}>Email:</Text>
-                                    <View style={{marginHorizontal:5, backgroundColor:"white",  borderRadius:20, padding:5}}>
+                                    <View style={{marginHorizontal:5, backgroundColor:"white",  borderRadius:20, padding:10}}>
                                         <TextInput
                                             // style={styles.input}
                                             autoCapitalize="none"
@@ -71,7 +71,7 @@ export default function Login({ navigation }) {
                                 {/* Password Input */}
                                 <View>
                                     <Text style={styles.label}>Password:</Text>
-                                    <View style={{flexDirection:"row", justifyContent:"space-between", marginHorizontal:5, backgroundColor:"white", alignItems:"center", borderRadius:20, padding:5}}>
+                                    <View style={{flexDirection:"row", justifyContent:"space-between", marginHorizontal:5, backgroundColor:"white", alignItems:"center", borderRadius:20, paddingHorizontal:8, paddingVertical:5}}>
                                         <TextInput
                                             // style={styles.input}
                                             autoCapitalize="none"

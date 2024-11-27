@@ -125,7 +125,7 @@ function Home({ navigation }) {
                     <Text style={{ color: "#0e0d0d" }}>Posted: {formatDate(item.createdAt)}</Text>
                     <Button
                       textColor="black"
-                      buttonColor="#dbdbd6"
+                      buttonColor="#dddd0b"
                       onPress={() => navigation.navigate('Politics')}
                     >
                       Read More
@@ -153,8 +153,8 @@ function Home({ navigation }) {
                   <Card.Actions>
                     <Text style={{ color: "#111111" }}>Posted: {formatDate(item.createdAt)}</Text>
                     <Button
-                      textColor="white"
-                      buttonColor="#0e0d0d"
+                      textColor="black"
+                      buttonColor="#0ecbec"
                       onPress={() => navigation.navigate('Entertainment')}
                     >
                       Read More
@@ -237,17 +237,17 @@ const styles = StyleSheet.create({
   card: {
     marginBottom: 20,
     marginHorizontal: 8,
-    backgroundColor: "#11ce3aff",
+    backgroundColor: "#e2e9ebff",
   },
   cardEnt: {
     marginBottom: 20,
     marginHorizontal: 8,
-    backgroundColor: "#f128aeff",
+    backgroundColor: "#e2e9ebff",
   },
   cardSport: {
     marginBottom: 20,
     marginHorizontal: 8,
-    backgroundColor: "#ece915ff",
+    backgroundColor: "#e2e9ebff",
   },
   title: {
     fontSize: 18,
