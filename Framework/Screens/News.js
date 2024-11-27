@@ -23,6 +23,14 @@ function Home({ navigation }) {
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  function getUserInfo() {
+    setPreloader(true);
+    onSnapshot(doc(db, "users", userUID), (snapShot) => {
+        setPreloader(false);
+        snapShot.exists() ? setUserInfo(snapShot.data()) : null;
+    });
+}
+
   const carouselLinks = [
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRO821Chq6MWkkjlx6mu_iWW4VGSO8w9VZWsg&s',
     'https://img.freepik.com/premium-vector/sports-news-with-abstract-background-sports-elements_1419-1926.jpg?w=360',
@@ -56,7 +64,7 @@ function Home({ navigation }) {
         setLoading(false);
       }
     };
-  
+    getUserInfo();
     fetchNews();
   }, []);
 

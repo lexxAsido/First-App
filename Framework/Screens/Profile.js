@@ -44,7 +44,7 @@ export function Profile({ navigation }) {
                             <Text style={{ fontSize: 22, fontFamily: Theme.fonts.text700 }}>{userInfo.firstname} {userInfo.lastname}</Text>
                             <Text style={{ fontSize: 15, fontFamily: Theme.fonts.text400, color: Theme.colors.light.bg2 }}>{userInfo.email}</Text>
                             <TouchableOpacity onPress={() => navigation.navigate("EditProfile")}
-                                style={{ borderColor: Theme.colors.primary, alignItems: 'center', justifyContent: 'center', position:"absolute", right: -14, top:-6 }}>
+                                style={{ borderColor: Theme.colors.primary, alignItems: 'center', justifyContent: 'center', position:"absolute", right: -30, top:-6 }}>
                                 <Icon source="pen" size={25} color="white"/>
                             </TouchableOpacity>
                         </View>
