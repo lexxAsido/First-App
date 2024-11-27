@@ -18,9 +18,10 @@
       "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#161515"
       },
-      "package": "com.lexxmedia.mobile"
+      "package": "com.lexxmedia.mobile",
+      "newArchEnabled": true
     },
     "web": {
       "favicon": "./assets/favicon.png"
