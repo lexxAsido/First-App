@@ -54,7 +54,7 @@ export default function Login({ navigation }) {
                                     <Text style={styles.label}>Email:</Text>
                                     <View style={{marginHorizontal:5, backgroundColor:"white",  borderRadius:20, padding:10}}>
                                         <TextInput
-                                            // style={styles.input}
+                                            style={{marginVertical:6}}
                                             autoCapitalize="none"
                                             onChangeText={prop.handleChange("email")}
                                             onBlur={prop.handleBlur("email")}
@@ -73,7 +73,7 @@ export default function Login({ navigation }) {
                                     <Text style={styles.label}>Password:</Text>
                                     <View style={{flexDirection:"row", justifyContent:"space-between", marginHorizontal:5, backgroundColor:"white", alignItems:"center", borderRadius:20, paddingHorizontal:8, paddingVertical:5}}>
                                         <TextInput
-                                            // style={styles.input}
+                                            style={{marginVertical:12}}
                                             autoCapitalize="none"
                                             secureTextEntry={!passwordVisible}
                                             onChangeText={prop.handleChange("password")}

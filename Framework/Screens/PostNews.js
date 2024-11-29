@@ -1,17 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import {
-    View,
-    TextInput,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    Modal,
-    FlatList,
-    Alert,
-    SafeAreaView,
-    ScrollView,
-    Pressable,
-} from 'react-native';
+import {View,TextInput,StyleSheet,Text,TouchableOpacity,Modal,FlatList,Alert,SafeAreaView,ScrollView,Pressable,} from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { AppContext } from '../Component/globalVariables';
 import { addDoc, collection } from 'firebase/firestore';

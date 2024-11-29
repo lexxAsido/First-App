@@ -15,6 +15,7 @@ import { Entertainment } from '../Screens/Entertainment';
 
 
 
+
 const Stack = createStackNavigator();
 
 export function StackNavigator() {
@@ -32,6 +33,7 @@ export function StackNavigator() {
                 <Stack.Screen name="Sport" component={Sport} />
                 <Stack.Screen name="Politics" component={Politics} />
                 <Stack.Screen name="PostNews" component={PostNews} />
+                
             </Stack.Navigator>
         </NavigationContainer>
     );

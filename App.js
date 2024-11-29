@@ -17,6 +17,7 @@ import { News } from "./Framework/Screens/News";
 import { PostNews } from "./Framework/Screens/PostNews";
 
 
+
 // Prevent splash screen from hiding automatically
 SplashScreen.preventAutoHideAsync();
 

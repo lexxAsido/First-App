@@ -131,7 +131,7 @@ export default function SignUp({ navigation }) {
 
                 <View style={styles.passwordContainer}>
                   <TextInput
-                    style={{marginVertical:4}}
+                    style={{marginVertical:12, padding:3}}
                     placeholder="Create New Password"
                     placeholderTextColor={Theme.colors.greenDark}
                     secureTextEntry={!passwordVisible}
